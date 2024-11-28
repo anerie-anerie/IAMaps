@@ -4,6 +4,7 @@ import folium
 # Step 1: Load the CSV file into a DataFrame
 data = pd.read_csv("land.csv")
 
+# CLEAN THE DATA! DOESNT FIT ALL THE CODE RPORPELRY KIDS MESSED IT UP
 # Step 2: Filter out rows without land use information
 data = data.dropna(subset=["land_use"])
 
