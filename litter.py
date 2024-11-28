@@ -3,7 +3,7 @@ import folium
 import matplotlib.cm as cm  # Import colormap from matplotlib
 
 # Step 1: Load CSV file into a pandas DataFrame
-data = pd.read_csv('data.csv')
+data = pd.read_csv('litter.csv')
 
 # Step 2: Drop rows where the Environmental Quality Index (EQI) is missing
 data = data.dropna(subset=['EQI'])
@@ -40,7 +40,6 @@ for idx, row in data.iterrows():
         location=[lat, lon],  # Correctly passing latitude and longitude as a list
         radius=7,  # Increase the radius size for bigger dots (previously 5)
         weight=2,  # Add a border for the circle (outline thickness)
-        color=get_color(eqi),  # Set the outline color
         fill=True,
         fill_color=get_color(eqi),  # Set the fill color to the same as the outline
         fill_opacity=1  # Opacity of the filled circle
