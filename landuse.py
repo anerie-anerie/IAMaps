@@ -90,7 +90,7 @@ for index, row in data.iterrows():
 # Step 6: Add a custom legend to the map
 legend_html = """
     <div style="position: fixed; 
-                bottom: 10vh; left: 5vw; width: 17vw; height: 69vh; 
+                bottom: 10vh; left: 5vw; width: 17vw; height: 74vh; 
                 background-color: white; z-index: 9999; border:0.5vw black; 
                 padding: 1vw; font-size: 0.8vw;">
         <b>Land Use Legend</b><br>
