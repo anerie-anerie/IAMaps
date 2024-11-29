@@ -78,7 +78,7 @@ for index, row in data.iterrows():
             folium.CircleMarker(
                 location=[latitude, longitude],
                 radius=18,
-                color=color,
+                color="black",
                 fill=True,
                 fill_color=color,
                 fill_opacity=1.0,
@@ -90,7 +90,7 @@ for index, row in data.iterrows():
 # Step 6: Add a custom legend to the map
 legend_html = """
     <div style="position: fixed; 
-                bottom: 10vh; left: 5vw; width: 17vw; height: 74vh; 
+                bottom: 10vh; left: 5vw; width: 17vw; height: 76vh; 
                 background-color: white; z-index: 9999; border:0.5vw black; 
                 padding: 1vw; font-size: 0.8vw;">
         <b>Land Use Legend</b><br>
@@ -101,7 +101,6 @@ legend_html = """
 
         <div style="background-color: #ADD8E6; width: 20px; height: 20px; float: left;"></div> Commercial (Fast Food)<br>
         <div style="background-color: #4682B4; width: 20px; height: 20px; float: left;"></div> Commercial (Personal Services)<br>
-        <div style="background-color: #5F9EA0; width: 20px; height: 20px; float: left;"></div> Commercial (Market)<br>
         <div style="background-color: #1E90FF; width: 20px; height: 20px; float: left;"></div> Commercial (Specialty Shop)<br><br>
 
         <div style="background-color: #D8BFD8; width: 20px; height: 20px; float: left;"></div> Entertainment (Hotel)<br>
