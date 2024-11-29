@@ -8,6 +8,7 @@ data = pd.read_csv("land.csv")
 # Step 2: Filter out rows without land use information
 data = data.dropna(subset=["land_use"])
 
+#prehaps, change the colors so theyre all shades of their overall one
 # Step 3: Define land use mapping with correct shorthand codes to full categories and colors
 land_use_mapping = {
     "Ra": {"category": "Residential - Apartment", "color": "blue"},
@@ -28,6 +29,7 @@ land_use_mapping = {
     "Ec": {"category": "Entertainment - Cinema", "color": "lightyellow"},
     "Eb": {"category": "Entertainment - Bar", "color": "black"},
     "Er": {"category": "Entertainment - Restaurant", "color": "lightblue"},
+    "Es": {"category": "Entertainment - Sports Center", "color": "indigo"},
     
     "Pe": {"category": "Public Building - Education", "color": "darkgreen"},
     "Pl": {"category": "Public Building - Library", "color": "darkred"},
@@ -69,7 +71,7 @@ for index, row in data.iterrows():
             # Add a CircleMarker for each point
             folium.CircleMarker(
                 location=[latitude, longitude],
-                radius=8,
+                radius=18,
                 color=color,
                 fill=True,
                 fill_color=color,
