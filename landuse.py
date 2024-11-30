@@ -9,13 +9,12 @@ data = data.dropna(subset=["land_use"])
 
 # Step 3: Define land use mapping with correct shorthand codes to full categories and colors
 land_use_mapping = {
-    "Ra": {"category": "Residential - Apartment", "color": "#FF6347"},
-    "Rs": {"category": "Residential - Semi-detached", "color": "#FF4500"},
-    "Rd": {"category": "Residential - Detached", "color": "#B22222"},
-    "Rt": {"category": "Residential - Townhouse", "color": "#DC143C"},
-    "Il": {"category": "Industrial - Light Manufacturing", "color": "yellow"},
-    "Cf": {"category": "Commercial - Fast Food", "color": "#ADD8E6"},
-    "Cp": {"category": "Commercial - Personal Services", "color": "#4682B4"},
+    "Ra": {"category": "Residential - Apartment", "color": "#ff7d7d"},
+    "Rs": {"category": "Residential - Semi-detached", "color": "#db896a"},
+    "Rd": {"category": "Residential - Detached", "color": "#ff66c4"},
+    "Rt": {"category": "Residential - Townhouse", "color": "#ff0000"},
+    "Cf": {"category": "Commercial - Fast Food", "color": "#5ce1e6"},
+    "Cp": {"category": "Commercial - Personal Services", "color": "#38b6ff"},
     "Cm": {"category": "Commercial - Market", "color": "#5F9EA0"},
     "Cs": {"category": "Commercial - Specialty Shop", "color": "#1E90FF"},
     "Co": {"category": "Commercial - Office", "color": "#00BFFF"},
@@ -105,34 +104,39 @@ folium.Marker(
 ).add_to(m)
 
 
-# Step 7: Add a custom legend to the map (same as before)
 legend_html = """
-    <div style="position: fixed; bottom: 10vh; left: 5vw; width: 17vw; height: 76vh; background-color: white; z-index: 9999; border:0.5vw black; padding: 1vw; font-size: 0.8vw;">
+    <div style="position: fixed; bottom: 10vh; left: 5vw; width: 20vw; height: 80vh; background-color: white; z-index: 9999; border: 0.5vw black; padding: 1vw; font-size: 0.8vw; overflow-y: auto;">
         <b>Land Use Legend</b><br>
-        <div style="background-color: #FF6347; width: 20px; height: 20px; float: left;"></div> Residential (Apartment)<br>
-        <div style="background-color: #FF4500; width: 20px; height: 20px; float: left;"></div> Residential (Semi-detached)<br>
-        <div style="background-color: #B22222; width: 20px; height: 20px; float: left;"></div> Residential (Detached)<br>
-        <div style="background-color: #DC143C; width: 20px; height: 20px; float: left;"></div> Residential (Townhouse)<br><br>
-        <div style="background-color: #ADD8E6; width: 20px; height: 20px; float: left;"></div> Commercial (Fast Food)<br>
-        <div style="background-color: #4682B4; width: 20px; height: 20px; float: left;"></div> Commercial (Personal Services)<br>
-        <div style="background-color: #1E90FF; width: 20px; height: 20px; float: left;"></div> Commercial (Specialty Shop)<br><br>
-        <div style="background-color: #D8BFD8; width: 20px; height: 20px; float: left;"></div> Entertainment (Hotel)<br>
-        <div style="background-color: #8A2BE2; width: 20px; height: 20px; float: left;"></div> Entertainment (Cinema)<br>
-        <div style="background-color: #800080; width: 20px; height: 20px; float: left;"></div> Entertainment (Bar)<br>
-        <div style="background-color: #9932CC; width: 20px; height: 20px; float: left;"></div> Entertainment (Restaurant)<br><br>
-        <div style="background-color: #FFA500; width: 20px; height: 20px; float: left;"></div> Public Building (Education)<br>
-        <div style="background-color: #FF8C00; width: 20px; height: 20px; float: left;"></div> Public Building (Library)<br>
-        <div style="background-color: #FF7F50; width: 20px; height: 20px; float: left;"></div> Public Building (Place of Worship)<br><br>
-        <div style="background-color: #32CD32; width: 20px; height: 20px; float: left;"></div> Open Space (Park)<br>
-        <div style="background-color: #228B22; width: 20px; height: 20px; float: left;"></div> Open Space (Sports Field)<br>
-        <div style="background-color: #006400; width: 20px; height: 20px; float: left;"></div> Open Space (Unused Land)<br><br>
-        <div style="background-color: #8B4513; width: 20px; height: 20px; float: left;"></div> Transport (Bus Stop)<br>
-        <div style="background-color: #A52A2A; width: 20px; height: 20px; float: left;"></div> Transport (Car Park)<br><br>
-        <div style="background-color: #00008B; width: 20px; height: 20px; float: left;"></div> Services (Financial)<br>
-        <div style="background-color: #000080; width: 20px; height: 20px; float: left;"></div> Services (Medical)<br>
-        <div style="background-color: #191970; width: 20px; height: 20px; float: left;"></div> Services (Business)<br>
+        <div style="background-color: #ff7d7d; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Residential - Apartment<br>
+        <div style="background-color: #db896a; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Residential - Semi-detached<br>
+        <div style="background-color: #ff66c4; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Residential - Detached<br>
+        <div style="background-color: #ff0000; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Residential - Townhouse<br>
+        <div style="background-color: #5ce1e6; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Commercial - Fast Food<br>
+        <div style="background-color: #38b6ff; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Commercial - Personal Services<br>
+        <div style="background-color: #5F9EA0; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Commercial - Market<br>
+        <div style="background-color: #1E90FF; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Commercial - Specialty Shop<br>
+        <div style="background-color: #00BFFF; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Commercial - Office<br>
+        <div style="background-color: #87CEEB; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Commercial - Vacant<br>
+        <div style="background-color: #D8BFD8; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Entertainment - Hotel<br>
+        <div style="background-color: #8A2BE2; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Entertainment - Cinema<br>
+        <div style="background-color: #800080; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Entertainment - Bar<br>
+        <div style="background-color: #9932CC; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Entertainment - Restaurant<br>
+        <div style="background-color: #4B0082; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Entertainment - Sports Center<br>
+        <div style="background-color: #FFA500; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Public Building - Education<br>
+        <div style="background-color: #FF8C00; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Public Building - Library<br>
+        <div style="background-color: #FF7F50; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Public Building - Place of Worship<br>
+        <div style="background-color: #32CD32; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Open Space - Park<br>
+        <div style="background-color: #228B22; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Open Space - Sports Field<br>
+        <div style="background-color: #006400; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Open Space - Unused Land<br>
+        <div style="background-color: #2E8B57; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Open Space - Derelict Building<br>
+        <div style="background-color: #8B4513; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Transport - Bus Stop<br>
+        <div style="background-color: #A52A2A; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Transport - Car Park<br>
+        <div style="background-color: #00008B; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Services - Financial<br>
+        <div style="background-color: #000080; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Services - Medical<br>
+        <div style="background-color: #191970; width: 20px; height: 20px; float: left; margin-right: 5px;"></div> Services - Business<br>
     </div>
 """
+
 
 # Add the legend to the map
 m.get_root().html.add_child(folium.Element(legend_html))
