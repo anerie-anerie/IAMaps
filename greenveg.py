@@ -6,8 +6,8 @@ import numpy as np
 data = pd.read_csv('greenveg.csv')
 
 # Step 2: Filter out rows where specific columns have values NaN or <= 0
-data_green_space = data[(data['green_space'].notna()) & (data['green_space'] > 0)]  # Green space > 0
-data_veg_index = data[(data['veg_index'].notna()) & (data['veg_index'] > 0)]  # Veg index > 0
+data_green_space = data[(data['green_space'].notna())]
+data_veg_index = data[(data['veg_index'].notna())]
 
 # Step 3: Remove rows where 'latitude' or 'longitude' is NaN
 data_green_space = data_green_space.dropna(subset=['latitude', 'longitude'])
@@ -108,15 +108,15 @@ legend_html = f'''
     <p><b>Legend</b></p>
     <p><b>Green Space</b></p>
     <i style="background: {get_green_space_color(min_green_space)}; width: 18px; height: 18px; border-radius: 50%; display: inline-block;"></i>
-    Low Green Space <br>
+    Poorly Maintained <br>
     <i style="background: {get_green_space_color(max_green_space)}; width: 18px; height: 18px; border-radius: 50%; display: inline-block;"></i>
-    High Green Space <br>
+    Very Well Maintained <br>
     <br>
     <p><b>Vegetation Index</b></p>
     <i style="background: {get_veg_index_color(min_veg_index)}; width: 18px; height: 18px; border-radius: 50%; display: inline-block;"></i>
-    Low Vegetation Index <br>
+    No Vegetation Visible <br>
     <i style="background: {get_veg_index_color(max_veg_index)}; width: 18px; height: 18px; border-radius: 50%; display: inline-block;"></i>
-    High Vegetation Index <br>
+    Lots of Vegetation <br>
 </div>
 '''
 
