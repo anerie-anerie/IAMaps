@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_197ed8d781b2e49ec912ce21adb49fad {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; bottom: 10vh; left: 5vw; width: 17vw; height: 76vh; background-color: white; z-index: 9999; border:0.5vw black; padding: 1vw; font-size: 0.8vw;">
+        <b>Land Use Legend</b><br>
+        <div style="background-color: #FF6347; width: 20px; height: 20px; float: left;"></div> Residential (Apartment)<br>
+        <div style="background-color: #FF4500; width: 20px; height: 20px; float: left;"></div> Residential (Semi-detached)<br>
+        <div style="background-color: #B22222; width: 20px; height: 20px; float: left;"></div> Residential (Detached)<br>
+        <div style="background-color: #DC143C; width: 20px; height: 20px; float: left;"></div> Residential (Townhouse)<br><br>
+        <div style="background-color: #ADD8E6; width: 20px; height: 20px; float: left;"></div> Commercial (Fast Food)<br>
+        <div style="background-color: #4682B4; width: 20px; height: 20px; float: left;"></div> Commercial (Personal Services)<br>
+        <div style="background-color: #1E90FF; width: 20px; height: 20px; float: left;"></div> Commercial (Specialty Shop)<br><br>
+        <div style="background-color: #D8BFD8; width: 20px; height: 20px; float: left;"></div> Entertainment (Hotel)<br>
+        <div style="background-color: #8A2BE2; width: 20px; height: 20px; float: left;"></div> Entertainment (Cinema)<br>
+        <div style="background-color: #800080; width: 20px; height: 20px; float: left;"></div> Entertainment (Bar)<br>
+        <div style="background-color: #9932CC; width: 20px; height: 20px; float: left;"></div> Entertainment (Restaurant)<br><br>
+        <div style="background-color: #FFA500; width: 20px; height: 20px; float: left;"></div> Public Building (Education)<br>
+        <div style="background-color: #FF8C00; width: 20px; height: 20px; float: left;"></div> Public Building (Library)<br>
+        <div style="background-color: #FF7F50; width: 20px; height: 20px; float: left;"></div> Public Building (Place of Worship)<br><br>
+        <div style="background-color: #32CD32; width: 20px; height: 20px; float: left;"></div> Open Space (Park)<br>
+        <div style="background-color: #228B22; width: 20px; height: 20px; float: left;"></div> Open Space (Sports Field)<br>
+        <div style="background-color: #006400; width: 20px; height: 20px; float: left;"></div> Open Space (Unused Land)<br><br>
+        <div style="background-color: #8B4513; width: 20px; height: 20px; float: left;"></div> Transport (Bus Stop)<br>
+        <div style="background-color: #A52A2A; width: 20px; height: 20px; float: left;"></div> Transport (Car Park)<br><br>
+        <div style="background-color: #00008B; width: 20px; height: 20px; float: left;"></div> Services (Financial)<br>
+        <div style="background-color: #000080; width: 20px; height: 20px; float: left;"></div> Services (Medical)<br>
+        <div style="background-color: #191970; width: 20px; height: 20px; float: left;"></div> Services (Business)<br>
+    </div>
+    
+            <div class="folium-map" id="map_197ed8d781b2e49ec912ce21adb49fad" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_197ed8d781b2e49ec912ce21adb49fad = L.map(
+                "map_197ed8d781b2e49ec912ce21adb49fad",
+                {
+                    center: [45.416901660175434, -75.69058823614034],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 16,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a7e45ea88ddaadd4a597f67ae3839e2a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_a7e45ea88ddaadd4a597f67ae3839e2a.addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+            var circle_marker_fe1a0aa4fcccf47ac72b9c3a80c8f782 = L.circleMarker(
+                [45.3993471, -75.68608998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_9c894b820ab4b36d1a4355fc9a62941d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e39985b07d11f5b4fe7e832eb2d9979e = $(`<div id="html_e39985b07d11f5b4fe7e832eb2d9979e" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_9c894b820ab4b36d1a4355fc9a62941d.setContent(html_e39985b07d11f5b4fe7e832eb2d9979e);
+            
+        
+
+        circle_marker_fe1a0aa4fcccf47ac72b9c3a80c8f782.bindPopup(popup_9c894b820ab4b36d1a4355fc9a62941d)
+        ;
+
+        
+    
+    
+            var circle_marker_300079116616213594daee27fdb9edd8 = L.circleMarker(
+                [45.3978694, -75.68529410000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_4c2a8eab0633250f9d27b8189f98fdb6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_94d5073869046c36c6b4fbe0b1ef4d7c = $(`<div id="html_94d5073869046c36c6b4fbe0b1ef4d7c" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_4c2a8eab0633250f9d27b8189f98fdb6.setContent(html_94d5073869046c36c6b4fbe0b1ef4d7c);
+            
+        
+
+        circle_marker_300079116616213594daee27fdb9edd8.bindPopup(popup_4c2a8eab0633250f9d27b8189f98fdb6)
+        ;
+
+        
+    
+    
+            var circle_marker_1b5df5a120dab8389b2ba51874b283c6 = L.circleMarker(
+                [45.39983201, -75.68514322],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_b14dd11c0042b0bc7a0fdc1fe6a88eca = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4ad211adb931deb713fe633400825b5d = $(`<div id="html_4ad211adb931deb713fe633400825b5d" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_b14dd11c0042b0bc7a0fdc1fe6a88eca.setContent(html_4ad211adb931deb713fe633400825b5d);
+            
+        
+
+        circle_marker_1b5df5a120dab8389b2ba51874b283c6.bindPopup(popup_b14dd11c0042b0bc7a0fdc1fe6a88eca)
+        ;
+
+        
+    
+    
+            var circle_marker_6a46f24d3607206f66986c39af418d3a = L.circleMarker(
+                [45.40019666, -75.68428909000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_8b203e4fa0d5ee39709c3be5b84e1531 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_214b1bacbdb9c2807c6a1094a652b813 = $(`<div id="html_214b1bacbdb9c2807c6a1094a652b813" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_8b203e4fa0d5ee39709c3be5b84e1531.setContent(html_214b1bacbdb9c2807c6a1094a652b813);
+            
+        
+
+        circle_marker_6a46f24d3607206f66986c39af418d3a.bindPopup(popup_8b203e4fa0d5ee39709c3be5b84e1531)
+        ;
+
+        
+    
+    
+            var circle_marker_92aa0407805d5037071d432202bbb27e = L.circleMarker(
+                [45.39899544, -75.6851784],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#191970", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_3cafa47f5db2aac13cfcbf50a3cc16c9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_77163b9b911ffa720f9266bd647df173 = $(`<div id="html_77163b9b911ffa720f9266bd647df173" style="width: 100.0%; height: 100.0%;">Land Use: Services - Business</div>`)[0];
+                popup_3cafa47f5db2aac13cfcbf50a3cc16c9.setContent(html_77163b9b911ffa720f9266bd647df173);
+            
+        
+
+        circle_marker_92aa0407805d5037071d432202bbb27e.bindPopup(popup_3cafa47f5db2aac13cfcbf50a3cc16c9)
+        ;
+
+        
+    
+    
+            var circle_marker_820873d1e323483a2b830cf96004212c = L.circleMarker(
+                [45.3978694, -75.68529410000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_0d3bcca0f28d580779107400a1234df1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c9b45fd89f3d2511d0c157a37cc08a0e = $(`<div id="html_c9b45fd89f3d2511d0c157a37cc08a0e" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_0d3bcca0f28d580779107400a1234df1.setContent(html_c9b45fd89f3d2511d0c157a37cc08a0e);
+            
+        
+
+        circle_marker_820873d1e323483a2b830cf96004212c.bindPopup(popup_0d3bcca0f28d580779107400a1234df1)
+        ;
+
+        
+    
+    
+            var circle_marker_e5af3714282dea846fc9252faf44ca45 = L.circleMarker(
+                [45.3978694, -75.68539410000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#800080", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_42c8744d8d454b200f9ae903f511bfb3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a88b0a07e1815dcdec1628156f0e6339 = $(`<div id="html_a88b0a07e1815dcdec1628156f0e6339" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Bar</div>`)[0];
+                popup_42c8744d8d454b200f9ae903f511bfb3.setContent(html_a88b0a07e1815dcdec1628156f0e6339);
+            
+        
+
+        circle_marker_e5af3714282dea846fc9252faf44ca45.bindPopup(popup_42c8744d8d454b200f9ae903f511bfb3)
+        ;
+
+        
+    
+    
+            var circle_marker_c4a2e59150cc71d7bbfc81d3daed93f9 = L.circleMarker(
+                [45.3978694, -75.6850941],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00BFFF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_8f5c60b812c03744c49580f06b4ff1ba = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_778effe0b42a353fef48e016b0cee353 = $(`<div id="html_778effe0b42a353fef48e016b0cee353" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Office</div>`)[0];
+                popup_8f5c60b812c03744c49580f06b4ff1ba.setContent(html_778effe0b42a353fef48e016b0cee353);
+            
+        
+
+        circle_marker_c4a2e59150cc71d7bbfc81d3daed93f9.bindPopup(popup_8f5c60b812c03744c49580f06b4ff1ba)
+        ;
+
+        
+    
+    
+            var circle_marker_12eedc0e415dfd7c72ad40ced057412f = L.circleMarker(
+                [45.399434, -75.6849356],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_f04a6cecb16b96236c8cfe0943f5948f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d2e163063a94c5c19dfff973b40e0095 = $(`<div id="html_d2e163063a94c5c19dfff973b40e0095" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_f04a6cecb16b96236c8cfe0943f5948f.setContent(html_d2e163063a94c5c19dfff973b40e0095);
+            
+        
+
+        circle_marker_12eedc0e415dfd7c72ad40ced057412f.bindPopup(popup_f04a6cecb16b96236c8cfe0943f5948f)
+        ;
+
+        
+    
+    
+            var circle_marker_011cbdbadabe2de1e66e1d0906e5d97f = L.circleMarker(
+                [45.399434, -75.6848356],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_ff4adde0e95feb057cecee236790129a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_64602d6b1b983810cd1c465f76c1cead = $(`<div id="html_64602d6b1b983810cd1c465f76c1cead" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_ff4adde0e95feb057cecee236790129a.setContent(html_64602d6b1b983810cd1c465f76c1cead);
+            
+        
+
+        circle_marker_011cbdbadabe2de1e66e1d0906e5d97f.bindPopup(popup_ff4adde0e95feb057cecee236790129a)
+        ;
+
+        
+    
+    
+            var circle_marker_f92a8943449a4bd2350882e630b46d47 = L.circleMarker(
+                [45.37671213, -75.70787173000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_9d003a7d35bc9cca9a43c6c2aadc272d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9443a60232810e4dc0c3dbccbff16651 = $(`<div id="html_9443a60232810e4dc0c3dbccbff16651" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_9d003a7d35bc9cca9a43c6c2aadc272d.setContent(html_9443a60232810e4dc0c3dbccbff16651);
+            
+        
+
+        circle_marker_f92a8943449a4bd2350882e630b46d47.bindPopup(popup_9d003a7d35bc9cca9a43c6c2aadc272d)
+        ;
+
+        
+    
+    
+            var circle_marker_1a430726fd292c74d88f35e951f219d6 = L.circleMarker(
+                [45.37671213, -75.70797173000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4B0082", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_9794eb18c40c206ef249879a373b45f7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f5010ba364fa5c7648f9593ae54d3cb1 = $(`<div id="html_f5010ba364fa5c7648f9593ae54d3cb1" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Sports Center</div>`)[0];
+                popup_9794eb18c40c206ef249879a373b45f7.setContent(html_f5010ba364fa5c7648f9593ae54d3cb1);
+            
+        
+
+        circle_marker_1a430726fd292c74d88f35e951f219d6.bindPopup(popup_9794eb18c40c206ef249879a373b45f7)
+        ;
+
+        
+    
+    
+            var circle_marker_2822168c4c460ac37785379b69be2f8c = L.circleMarker(
+                [45.37671213, -75.70807173],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_1a57e9ef669b52d43fe5dd96aa1f2c2a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cd64c086448154514693ee272a50adde = $(`<div id="html_cd64c086448154514693ee272a50adde" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_1a57e9ef669b52d43fe5dd96aa1f2c2a.setContent(html_cd64c086448154514693ee272a50adde);
+            
+        
+
+        circle_marker_2822168c4c460ac37785379b69be2f8c.bindPopup(popup_1a57e9ef669b52d43fe5dd96aa1f2c2a)
+        ;
+
+        
+    
+    
+            var circle_marker_8e4534cb6442b20d5140422f993e2e7a = L.circleMarker(
+                [45.37671213, -75.70777173],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_af27a280901ad11f55d115697d96a261 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_890376caef3a086afc2e46d9b90cbbc8 = $(`<div id="html_890376caef3a086afc2e46d9b90cbbc8" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_af27a280901ad11f55d115697d96a261.setContent(html_890376caef3a086afc2e46d9b90cbbc8);
+            
+        
+
+        circle_marker_8e4534cb6442b20d5140422f993e2e7a.bindPopup(popup_af27a280901ad11f55d115697d96a261)
+        ;
+
+        
+    
+    
+            var circle_marker_0508f420b44565239abdd7b82792da0f = L.circleMarker(
+                [45.37671213, -75.70767173],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#228B22", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_d9d3f284663101140bd6eeaabb200b8a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7011cbc12dac6fb12aa1875cdcfdc385 = $(`<div id="html_7011cbc12dac6fb12aa1875cdcfdc385" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Sports Field</div>`)[0];
+                popup_d9d3f284663101140bd6eeaabb200b8a.setContent(html_7011cbc12dac6fb12aa1875cdcfdc385);
+            
+        
+
+        circle_marker_0508f420b44565239abdd7b82792da0f.bindPopup(popup_d9d3f284663101140bd6eeaabb200b8a)
+        ;
+
+        
+    
+    
+            var circle_marker_0a0bc5a7bbf7ad82437804900e3f3b56 = L.circleMarker(
+                [45.37671213, -75.70757173],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_d504f21c01b450304475ccafd3c4d910 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_186d741297f85f53bb3bb13ee2b90882 = $(`<div id="html_186d741297f85f53bb3bb13ee2b90882" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_d504f21c01b450304475ccafd3c4d910.setContent(html_186d741297f85f53bb3bb13ee2b90882);
+            
+        
+
+        circle_marker_0a0bc5a7bbf7ad82437804900e3f3b56.bindPopup(popup_d504f21c01b450304475ccafd3c4d910)
+        ;
+
+        
+    
+    
+            var circle_marker_0ee4a0badefa9e10da3a3dac10b1a0d5 = L.circleMarker(
+                [45.3996011, -75.68490267],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c122a931c6c0c1279d7a6ca774869daf = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_20edb5a04ee98f94d3a9c8dba0502b78 = $(`<div id="html_20edb5a04ee98f94d3a9c8dba0502b78" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_c122a931c6c0c1279d7a6ca774869daf.setContent(html_20edb5a04ee98f94d3a9c8dba0502b78);
+            
+        
+
+        circle_marker_0ee4a0badefa9e10da3a3dac10b1a0d5.bindPopup(popup_c122a931c6c0c1279d7a6ca774869daf)
+        ;
+
+        
+    
+    
+            var circle_marker_929f0aed3a18232963d481bb8ac59767 = L.circleMarker(
+                [45.3990165, -75.6850731],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_a3e62fde1af86f4188592b2f9ea16da9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_221ebf48408e00db94b55bc6150f201c = $(`<div id="html_221ebf48408e00db94b55bc6150f201c" style="width: 100.0%; height: 100.0%;">Land Use: Industrial - Light Manufacturing</div>`)[0];
+                popup_a3e62fde1af86f4188592b2f9ea16da9.setContent(html_221ebf48408e00db94b55bc6150f201c);
+            
+        
+
+        circle_marker_929f0aed3a18232963d481bb8ac59767.bindPopup(popup_a3e62fde1af86f4188592b2f9ea16da9)
+        ;
+
+        
+    
+    
+            var circle_marker_ce39dba58a593764c1de006aec590368 = L.circleMarker(
+                [45.3990165, -75.6851731],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_78f09598a132a7c33300c2ae1914914e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7fbec0fde0a308ef4b3c039a0b681d3f = $(`<div id="html_7fbec0fde0a308ef4b3c039a0b681d3f" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_78f09598a132a7c33300c2ae1914914e.setContent(html_7fbec0fde0a308ef4b3c039a0b681d3f);
+            
+        
+
+        circle_marker_ce39dba58a593764c1de006aec590368.bindPopup(popup_78f09598a132a7c33300c2ae1914914e)
+        ;
+
+        
+    
+    
+            var circle_marker_f060d08b035f24eee9cab87c8b094354 = L.circleMarker(
+                [45.3990165, -75.68527309999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32CD32", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_881379e9c068380f84a1e706384153a8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2b346ad5f30cc7605dae08024ea34762 = $(`<div id="html_2b346ad5f30cc7605dae08024ea34762" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Park</div>`)[0];
+                popup_881379e9c068380f84a1e706384153a8.setContent(html_2b346ad5f30cc7605dae08024ea34762);
+            
+        
+
+        circle_marker_f060d08b035f24eee9cab87c8b094354.bindPopup(popup_881379e9c068380f84a1e706384153a8)
+        ;
+
+        
+    
+    
+            var circle_marker_5171489f29894f09dc969616c0c1ace9 = L.circleMarker(
+                [45.3990165, -75.68537309999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#228B22", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_1f90a7f45dccf3174917a6080a501ee7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2ed33e8a0831126bbc7bb4dbd9073786 = $(`<div id="html_2ed33e8a0831126bbc7bb4dbd9073786" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Sports Field</div>`)[0];
+                popup_1f90a7f45dccf3174917a6080a501ee7.setContent(html_2ed33e8a0831126bbc7bb4dbd9073786);
+            
+        
+
+        circle_marker_5171489f29894f09dc969616c0c1ace9.bindPopup(popup_1f90a7f45dccf3174917a6080a501ee7)
+        ;
+
+        
+    
+    
+            var circle_marker_1a93764c05c35970f1c12b48a5dd0f4a = L.circleMarker(
+                [45.3990165, -75.6849731],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#006400", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_4ad15095c57c440571fc7cff8313a73c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cbfb064928771c4be72c9f71258f7958 = $(`<div id="html_cbfb064928771c4be72c9f71258f7958" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Unused Land</div>`)[0];
+                popup_4ad15095c57c440571fc7cff8313a73c.setContent(html_cbfb064928771c4be72c9f71258f7958);
+            
+        
+
+        circle_marker_1a93764c05c35970f1c12b48a5dd0f4a.bindPopup(popup_4ad15095c57c440571fc7cff8313a73c)
+        ;
+
+        
+    
+    
+            var circle_marker_297ff94b9ea16a758b380b277e5117bb = L.circleMarker(
+                [45.3990165, -75.68487309999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_f66d6599ae2487dfb3a014267c96cf1f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3e7a99f4788af4d50c02f7b0cccaa7bf = $(`<div id="html_3e7a99f4788af4d50c02f7b0cccaa7bf" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_f66d6599ae2487dfb3a014267c96cf1f.setContent(html_3e7a99f4788af4d50c02f7b0cccaa7bf);
+            
+        
+
+        circle_marker_297ff94b9ea16a758b380b277e5117bb.bindPopup(popup_f66d6599ae2487dfb3a014267c96cf1f)
+        ;
+
+        
+    
+    
+            var circle_marker_69f76564b5ef5e8073b8f71d9e55cc92 = L.circleMarker(
+                [45.3990165, -75.68477309999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_bfbcfa19c47631745f54f60cfb83466d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1a401a045e7e57fec148de8ff2c810c2 = $(`<div id="html_1a401a045e7e57fec148de8ff2c810c2" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Education</div>`)[0];
+                popup_bfbcfa19c47631745f54f60cfb83466d.setContent(html_1a401a045e7e57fec148de8ff2c810c2);
+            
+        
+
+        circle_marker_69f76564b5ef5e8073b8f71d9e55cc92.bindPopup(popup_bfbcfa19c47631745f54f60cfb83466d)
+        ;
+
+        
+    
+    
+            var circle_marker_2cb2d91c443fdc566a028ad5dc8d8aec = L.circleMarker(
+                [45.3990165, -75.6846731],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_4ddf169c3bf12c1c3c1c899fd203a47b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_99732b1287158bcd685500af5c92224d = $(`<div id="html_99732b1287158bcd685500af5c92224d" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_4ddf169c3bf12c1c3c1c899fd203a47b.setContent(html_99732b1287158bcd685500af5c92224d);
+            
+        
+
+        circle_marker_2cb2d91c443fdc566a028ad5dc8d8aec.bindPopup(popup_4ddf169c3bf12c1c3c1c899fd203a47b)
+        ;
+
+        
+    
+    
+            var circle_marker_ca6c2903b279fee3d18d975666adb251 = L.circleMarker(
+                [45.39997644, -75.68530709000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_615e9007964affec341902f1896e89a9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a3e64c6902bfb80825ff1ffbbcd77570 = $(`<div id="html_a3e64c6902bfb80825ff1ffbbcd77570" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Education</div>`)[0];
+                popup_615e9007964affec341902f1896e89a9.setContent(html_a3e64c6902bfb80825ff1ffbbcd77570);
+            
+        
+
+        circle_marker_ca6c2903b279fee3d18d975666adb251.bindPopup(popup_615e9007964affec341902f1896e89a9)
+        ;
+
+        
+    
+    
+            var circle_marker_2e3c3d41e9b922af66b31c17d1e8360a = L.circleMarker(
+                [45.399926, -75.68479976],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_296eba94eae5278c6c10afd6550670c0 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1b1c4cb1cf562a0c3d89bc6b9ed189d7 = $(`<div id="html_1b1c4cb1cf562a0c3d89bc6b9ed189d7" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_296eba94eae5278c6c10afd6550670c0.setContent(html_1b1c4cb1cf562a0c3d89bc6b9ed189d7);
+            
+        
+
+        circle_marker_2e3c3d41e9b922af66b31c17d1e8360a.bindPopup(popup_296eba94eae5278c6c10afd6550670c0)
+        ;
+
+        
+    
+    
+            var circle_marker_455768ded323bc6d634d02f86917801d = L.circleMarker(
+                [45.39932251, -75.68625467],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_5b38396fb26c92e50b05771f6a81be37 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0116ea6008ca55aafb7513ef47b0373c = $(`<div id="html_0116ea6008ca55aafb7513ef47b0373c" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_5b38396fb26c92e50b05771f6a81be37.setContent(html_0116ea6008ca55aafb7513ef47b0373c);
+            
+        
+
+        circle_marker_455768ded323bc6d634d02f86917801d.bindPopup(popup_5b38396fb26c92e50b05771f6a81be37)
+        ;
+
+        
+    
+    
+            var circle_marker_35af726cbc5247ab85697650b6d47b70 = L.circleMarker(
+                [45.41529579, -75.68667874],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32CD32", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_08cac64f991595605467d0b42a72673f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_67e617f704ce8a6bdbbbbe598c0fd691 = $(`<div id="html_67e617f704ce8a6bdbbbbe598c0fd691" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Park</div>`)[0];
+                popup_08cac64f991595605467d0b42a72673f.setContent(html_67e617f704ce8a6bdbbbbe598c0fd691);
+            
+        
+
+        circle_marker_35af726cbc5247ab85697650b6d47b70.bindPopup(popup_08cac64f991595605467d0b42a72673f)
+        ;
+
+        
+    
+    
+            var circle_marker_17ac47032884e275f904f8eab932b27b = L.circleMarker(
+                [45.41743525, -75.69010014],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_7ccc1835a1ff4167a2306e3c3ef827c9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cd8e4184f0c5e2cb6f745ff7d434e870 = $(`<div id="html_cd8e4184f0c5e2cb6f745ff7d434e870" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_7ccc1835a1ff4167a2306e3c3ef827c9.setContent(html_cd8e4184f0c5e2cb6f745ff7d434e870);
+            
+        
+
+        circle_marker_17ac47032884e275f904f8eab932b27b.bindPopup(popup_7ccc1835a1ff4167a2306e3c3ef827c9)
+        ;
+
+        
+    
+    
+            var circle_marker_fbba3eb58b51787aac0b89727e02d1d9 = L.circleMarker(
+                [45.41759699, -75.69005211],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF7F50", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_a9decfbb39b8f9c43afcf0662cb3ed74 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0714494910ca5e21ed1d745184314bc4 = $(`<div id="html_0714494910ca5e21ed1d745184314bc4" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Place of Worship</div>`)[0];
+                popup_a9decfbb39b8f9c43afcf0662cb3ed74.setContent(html_0714494910ca5e21ed1d745184314bc4);
+            
+        
+
+        circle_marker_fbba3eb58b51787aac0b89727e02d1d9.bindPopup(popup_a9decfbb39b8f9c43afcf0662cb3ed74)
+        ;
+
+        
+    
+    
+            var circle_marker_acc45943d33802dff236699af02f540f = L.circleMarker(
+                [45.41759699, -75.68995211],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_6279e1689dac90ba0415a1fa1360caa7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2044c66ac5cb53daf36038f389d4efad = $(`<div id="html_2044c66ac5cb53daf36038f389d4efad" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_6279e1689dac90ba0415a1fa1360caa7.setContent(html_2044c66ac5cb53daf36038f389d4efad);
+            
+        
+
+        circle_marker_acc45943d33802dff236699af02f540f.bindPopup(popup_6279e1689dac90ba0415a1fa1360caa7)
+        ;
+
+        
+    
+    
+            var circle_marker_0f11041d8ff8cf52dd72643a8fddd3f8 = L.circleMarker(
+                [45.4160652, -75.68889610000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#800080", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_9ce58f2dd6cf0591e2167de9a9fe6cab = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3146afeecefc36569d5768484dc023c7 = $(`<div id="html_3146afeecefc36569d5768484dc023c7" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Bar</div>`)[0];
+                popup_9ce58f2dd6cf0591e2167de9a9fe6cab.setContent(html_3146afeecefc36569d5768484dc023c7);
+            
+        
+
+        circle_marker_0f11041d8ff8cf52dd72643a8fddd3f8.bindPopup(popup_9ce58f2dd6cf0591e2167de9a9fe6cab)
+        ;
+
+        
+    
+    
+            var circle_marker_3fcf276da34445153ee97064de463ec8 = L.circleMarker(
+                [45.41737817, -75.68997252],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32CD32", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c11374b7c99d3f4b65e172e477cf1cc8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a9867cd58fcd5a9dd2d098eb2204eabf = $(`<div id="html_a9867cd58fcd5a9dd2d098eb2204eabf" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Park</div>`)[0];
+                popup_c11374b7c99d3f4b65e172e477cf1cc8.setContent(html_a9867cd58fcd5a9dd2d098eb2204eabf);
+            
+        
+
+        circle_marker_3fcf276da34445153ee97064de463ec8.bindPopup(popup_c11374b7c99d3f4b65e172e477cf1cc8)
+        ;
+
+        
+    
+    
+            var circle_marker_61989d74e91c7e586a7fe4ad7ed3f7a8 = L.circleMarker(
+                [45.41712993, -75.68987937],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_5f59733c39f9808d977a97fdb476749d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b12e7faafb91d1c0ff6dc8013eb01c92 = $(`<div id="html_b12e7faafb91d1c0ff6dc8013eb01c92" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_5f59733c39f9808d977a97fdb476749d.setContent(html_b12e7faafb91d1c0ff6dc8013eb01c92);
+            
+        
+
+        circle_marker_61989d74e91c7e586a7fe4ad7ed3f7a8.bindPopup(popup_5f59733c39f9808d977a97fdb476749d)
+        ;
+
+        
+    
+    
+            var circle_marker_b8ebd5784c8c16c49d6ef25fbe26fbdd = L.circleMarker(
+                [45.41527702, -75.68789272000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#800080", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_2527ce0b0fa0f95449a7865101ddf21f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2d911fb6a1b5ee970080130f7d20eba9 = $(`<div id="html_2d911fb6a1b5ee970080130f7d20eba9" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Bar</div>`)[0];
+                popup_2527ce0b0fa0f95449a7865101ddf21f.setContent(html_2d911fb6a1b5ee970080130f7d20eba9);
+            
+        
+
+        circle_marker_b8ebd5784c8c16c49d6ef25fbe26fbdd.bindPopup(popup_2527ce0b0fa0f95449a7865101ddf21f)
+        ;
+
+        
+    
+    
+            var circle_marker_425add57dbd34cf047cc7598c7d9ea8f = L.circleMarker(
+                [45.41835798, -75.6905909],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_242c164f136f98b63670e4a830f40ac3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_fa07fea8169fecfbd796f55a4a86038b = $(`<div id="html_fa07fea8169fecfbd796f55a4a86038b" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_242c164f136f98b63670e4a830f40ac3.setContent(html_fa07fea8169fecfbd796f55a4a86038b);
+            
+        
+
+        circle_marker_425add57dbd34cf047cc7598c7d9ea8f.bindPopup(popup_242c164f136f98b63670e4a830f40ac3)
+        ;
+
+        
+    
+    
+            var circle_marker_8c77c37f886838e306266af9095e9156 = L.circleMarker(
+                [45.41646855, -75.68911959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_2a3540d3efdbe3f7a99a84bbd2ec31e7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2e0feb2d67dad5deb02a683618ef90b9 = $(`<div id="html_2e0feb2d67dad5deb02a683618ef90b9" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_2a3540d3efdbe3f7a99a84bbd2ec31e7.setContent(html_2e0feb2d67dad5deb02a683618ef90b9);
+            
+        
+
+        circle_marker_8c77c37f886838e306266af9095e9156.bindPopup(popup_2a3540d3efdbe3f7a99a84bbd2ec31e7)
+        ;
+
+        
+    
+    
+            var circle_marker_8639e3540bdd40f8ed63f75c5fcee7ec = L.circleMarker(
+                [45.41646855, -75.68921959000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_099e92a29601fa421d898b1e8cf2a369 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c0cb97100359df176bc36641a65f025a = $(`<div id="html_c0cb97100359df176bc36641a65f025a" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_099e92a29601fa421d898b1e8cf2a369.setContent(html_c0cb97100359df176bc36641a65f025a);
+            
+        
+
+        circle_marker_8639e3540bdd40f8ed63f75c5fcee7ec.bindPopup(popup_099e92a29601fa421d898b1e8cf2a369)
+        ;
+
+        
+    
+    
+            var circle_marker_fe02b3e73fc40643b5a75e5dc69a19ef = L.circleMarker(
+                [45.41646855, -75.68931959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_0765f4f366f0a3eedd2ec768aae8e081 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_57a024ec8f3b55635fc6a9cb4fdb98af = $(`<div id="html_57a024ec8f3b55635fc6a9cb4fdb98af" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_0765f4f366f0a3eedd2ec768aae8e081.setContent(html_57a024ec8f3b55635fc6a9cb4fdb98af);
+            
+        
+
+        circle_marker_fe02b3e73fc40643b5a75e5dc69a19ef.bindPopup(popup_0765f4f366f0a3eedd2ec768aae8e081)
+        ;
+
+        
+    
+    
+            var circle_marker_1b42f1bed57fa4ed7878d287d6a8e2b0 = L.circleMarker(
+                [45.41646855, -75.68901959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_90756b5ffe94e2c40af2411a997b3229 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d6c70ad9fd9c9a510f89df0df7bd8881 = $(`<div id="html_d6c70ad9fd9c9a510f89df0df7bd8881" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_90756b5ffe94e2c40af2411a997b3229.setContent(html_d6c70ad9fd9c9a510f89df0df7bd8881);
+            
+        
+
+        circle_marker_1b42f1bed57fa4ed7878d287d6a8e2b0.bindPopup(popup_90756b5ffe94e2c40af2411a997b3229)
+        ;
+
+        
+    
+    
+            var circle_marker_cdec5d15cf09540190a3613cd55e4964 = L.circleMarker(
+                [45.41646855, -75.68891959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c62c5bbac2e1e2fb8261827d325b06ef = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cec3bd40f638f37c5f98227737f1fcf5 = $(`<div id="html_cec3bd40f638f37c5f98227737f1fcf5" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_c62c5bbac2e1e2fb8261827d325b06ef.setContent(html_cec3bd40f638f37c5f98227737f1fcf5);
+            
+        
+
+        circle_marker_cdec5d15cf09540190a3613cd55e4964.bindPopup(popup_c62c5bbac2e1e2fb8261827d325b06ef)
+        ;
+
+        
+    
+    
+            var circle_marker_3edbfdb1b598c38ee0cbf419637b1280 = L.circleMarker(
+                [45.41646855, -75.68881959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32CD32", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_949451183ee6ea030e8914a446e48e13 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c91f2a4f9e5db9e36347fb492dee170d = $(`<div id="html_c91f2a4f9e5db9e36347fb492dee170d" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Park</div>`)[0];
+                popup_949451183ee6ea030e8914a446e48e13.setContent(html_c91f2a4f9e5db9e36347fb492dee170d);
+            
+        
+
+        circle_marker_3edbfdb1b598c38ee0cbf419637b1280.bindPopup(popup_949451183ee6ea030e8914a446e48e13)
+        ;
+
+        
+    
+    
+            var circle_marker_898715a8bd9c10bff7682152241f9557 = L.circleMarker(
+                [45.41465, -75.6878366],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_6d59ed47ca1323da5a9f0cb6a2dccda8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_965cf9fc1169eaea987d204945513867 = $(`<div id="html_965cf9fc1169eaea987d204945513867" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_6d59ed47ca1323da5a9f0cb6a2dccda8.setContent(html_965cf9fc1169eaea987d204945513867);
+            
+        
+
+        circle_marker_898715a8bd9c10bff7682152241f9557.bindPopup(popup_6d59ed47ca1323da5a9f0cb6a2dccda8)
+        ;
+
+        
+    
+    
+            var circle_marker_ca6cf695a1a02573e14a1492691ae8c1 = L.circleMarker(
+                [45.41465, -75.6877366],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC143C", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_d0f659dbae6a2118eba6f9735b727e9c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c6316ff9498022dd464f95123d31c245 = $(`<div id="html_c6316ff9498022dd464f95123d31c245" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Townhouse</div>`)[0];
+                popup_d0f659dbae6a2118eba6f9735b727e9c.setContent(html_c6316ff9498022dd464f95123d31c245);
+            
+        
+
+        circle_marker_ca6cf695a1a02573e14a1492691ae8c1.bindPopup(popup_d0f659dbae6a2118eba6f9735b727e9c)
+        ;
+
+        
+    
+    
+            var circle_marker_70c18bbfba5e2b0b7f2ae3001549d038 = L.circleMarker(
+                [45.41811772, -75.69083209],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00008B", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c1c396d56527facd24be979b3b782088 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c5f8f01acb8a5be08b45ac49ef1e0108 = $(`<div id="html_c5f8f01acb8a5be08b45ac49ef1e0108" style="width: 100.0%; height: 100.0%;">Land Use: Services - Financial</div>`)[0];
+                popup_c1c396d56527facd24be979b3b782088.setContent(html_c5f8f01acb8a5be08b45ac49ef1e0108);
+            
+        
+
+        circle_marker_70c18bbfba5e2b0b7f2ae3001549d038.bindPopup(popup_c1c396d56527facd24be979b3b782088)
+        ;
+
+        
+    
+    
+            var circle_marker_8ea53b98f1d46c2b904166c2e19a078b = L.circleMarker(
+                [45.41811772, -75.69093209],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_326d100754df5dca26aa1bce60d043b4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ecf9f30c92bd7b5afa521f321fa11c29 = $(`<div id="html_ecf9f30c92bd7b5afa521f321fa11c29" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_326d100754df5dca26aa1bce60d043b4.setContent(html_ecf9f30c92bd7b5afa521f321fa11c29);
+            
+        
+
+        circle_marker_8ea53b98f1d46c2b904166c2e19a078b.bindPopup(popup_326d100754df5dca26aa1bce60d043b4)
+        ;
+
+        
+    
+    
+            var circle_marker_00e2d1f02f2aef21426ae109906bfa70 = L.circleMarker(
+                [45.41811772, -75.69063209],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_08ee8653df714b4f1c5df5cf6f49f128 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e9b9e2125e2fa611cc0c3a395d4fd215 = $(`<div id="html_e9b9e2125e2fa611cc0c3a395d4fd215" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_08ee8653df714b4f1c5df5cf6f49f128.setContent(html_e9b9e2125e2fa611cc0c3a395d4fd215);
+            
+        
+
+        circle_marker_00e2d1f02f2aef21426ae109906bfa70.bindPopup(popup_08ee8653df714b4f1c5df5cf6f49f128)
+        ;
+
+        
+    
+    
+            var circle_marker_7e235731f5a8ac03022bc8dadafe17ac = L.circleMarker(
+                [45.41545065, -75.68833635],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_30b32fefcfa596859a868b6e690b65bb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_237ade448c633531a04f9824f8f17e3b = $(`<div id="html_237ade448c633531a04f9824f8f17e3b" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_30b32fefcfa596859a868b6e690b65bb.setContent(html_237ade448c633531a04f9824f8f17e3b);
+            
+        
+
+        circle_marker_7e235731f5a8ac03022bc8dadafe17ac.bindPopup(popup_30b32fefcfa596859a868b6e690b65bb)
+        ;
+
+        
+    
+    
+            var circle_marker_9df9f6325555d0c9167ff5de9e1d43af = L.circleMarker(
+                [45.41771403, -75.69046878],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_7b447a62a10c53dee1be90b1f704a905 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ea3581ed70340c60be799897cd6d1c38 = $(`<div id="html_ea3581ed70340c60be799897cd6d1c38" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_7b447a62a10c53dee1be90b1f704a905.setContent(html_ea3581ed70340c60be799897cd6d1c38);
+            
+        
+
+        circle_marker_9df9f6325555d0c9167ff5de9e1d43af.bindPopup(popup_7b447a62a10c53dee1be90b1f704a905)
+        ;
+
+        
+    
+    
+            var circle_marker_453c33a91f104282dc0caf7b50b88475 = L.circleMarker(
+                [45.41835591, -75.6909476],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_6398f0a3f0f04090585e9f9d03ac1c86 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_91e71083abaf9504cf1e3a9185746770 = $(`<div id="html_91e71083abaf9504cf1e3a9185746770" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_6398f0a3f0f04090585e9f9d03ac1c86.setContent(html_91e71083abaf9504cf1e3a9185746770);
+            
+        
+
+        circle_marker_453c33a91f104282dc0caf7b50b88475.bindPopup(popup_6398f0a3f0f04090585e9f9d03ac1c86)
+        ;
+
+        
+    
+    
+            var circle_marker_f224c43895c2ea849bbe88d46450a5f4 = L.circleMarker(
+                [45.41586523, -75.68828156000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_5ce975b9de7769160b0d51ae23fe3bb7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c011dd9d1fc84696d6daaec9deae546c = $(`<div id="html_c011dd9d1fc84696d6daaec9deae546c" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_5ce975b9de7769160b0d51ae23fe3bb7.setContent(html_c011dd9d1fc84696d6daaec9deae546c);
+            
+        
+
+        circle_marker_f224c43895c2ea849bbe88d46450a5f4.bindPopup(popup_5ce975b9de7769160b0d51ae23fe3bb7)
+        ;
+
+        
+    
+    
+            var circle_marker_a6eb87e0eccb8e485913c2f7fc4a16b1 = L.circleMarker(
+                [45.41865151, -75.69123479000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_77e120b17cee303f0828be7862deae2e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cb3efdc3520bbaede4ee987312028eb0 = $(`<div id="html_cb3efdc3520bbaede4ee987312028eb0" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_77e120b17cee303f0828be7862deae2e.setContent(html_cb3efdc3520bbaede4ee987312028eb0);
+            
+        
+
+        circle_marker_a6eb87e0eccb8e485913c2f7fc4a16b1.bindPopup(popup_77e120b17cee303f0828be7862deae2e)
+        ;
+
+        
+    
+    
+            var circle_marker_ae03ccf3e371b267a5c329c944a68c65 = L.circleMarker(
+                [45.4157928, -75.6885273],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32CD32", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_e1dd4e97522941809cc9e6c542bc3614 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b286b6a52fb3200c3814deb74027c806 = $(`<div id="html_b286b6a52fb3200c3814deb74027c806" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Park</div>`)[0];
+                popup_e1dd4e97522941809cc9e6c542bc3614.setContent(html_b286b6a52fb3200c3814deb74027c806);
+            
+        
+
+        circle_marker_ae03ccf3e371b267a5c329c944a68c65.bindPopup(popup_e1dd4e97522941809cc9e6c542bc3614)
+        ;
+
+        
+    
+    
+            var circle_marker_6665ab797279ff539de5482012785a20 = L.circleMarker(
+                [45.4157928, -75.68862730000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B4513", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_062062d8e1cb72de694c8f3779644f6a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1cab41a5c141242f38969728a1766d1a = $(`<div id="html_1cab41a5c141242f38969728a1766d1a" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Bus Stop</div>`)[0];
+                popup_062062d8e1cb72de694c8f3779644f6a.setContent(html_1cab41a5c141242f38969728a1766d1a);
+            
+        
+
+        circle_marker_6665ab797279ff539de5482012785a20.bindPopup(popup_062062d8e1cb72de694c8f3779644f6a)
+        ;
+
+        
+    
+    
+            var circle_marker_88007beba3645a0b0e30c2be6e7b39a5 = L.circleMarker(
+                [45.4157928, -75.6883273],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_12a5f109772990b9ffad3c6aa6805a88 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_68b464ac600978ab14f2178fe49d33d6 = $(`<div id="html_68b464ac600978ab14f2178fe49d33d6" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Education</div>`)[0];
+                popup_12a5f109772990b9ffad3c6aa6805a88.setContent(html_68b464ac600978ab14f2178fe49d33d6);
+            
+        
+
+        circle_marker_88007beba3645a0b0e30c2be6e7b39a5.bindPopup(popup_12a5f109772990b9ffad3c6aa6805a88)
+        ;
+
+        
+    
+    
+            var circle_marker_ee903189f7cfd77a64acf433e9f5dce8 = L.circleMarker(
+                [45.41837062, -75.69098497],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_80533ce854f1152fac02fef16cd46d1d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_984915421b1149bbb392a8f12772b7e7 = $(`<div id="html_984915421b1149bbb392a8f12772b7e7" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_80533ce854f1152fac02fef16cd46d1d.setContent(html_984915421b1149bbb392a8f12772b7e7);
+            
+        
+
+        circle_marker_ee903189f7cfd77a64acf433e9f5dce8.bindPopup(popup_80533ce854f1152fac02fef16cd46d1d)
+        ;
+
+        
+    
+    
+            var circle_marker_228c16fc7738c7be51d8c2a6d974dbfa = L.circleMarker(
+                [45.41886274, -75.69125298],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_451deac91f5e2cdbb6b9d10a6c94cb73 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_deec36c799f25139b3b38e9873412b14 = $(`<div id="html_deec36c799f25139b3b38e9873412b14" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_451deac91f5e2cdbb6b9d10a6c94cb73.setContent(html_deec36c799f25139b3b38e9873412b14);
+            
+        
+
+        circle_marker_228c16fc7738c7be51d8c2a6d974dbfa.bindPopup(popup_451deac91f5e2cdbb6b9d10a6c94cb73)
+        ;
+
+        
+    
+    
+            var circle_marker_9336d9681b45ffd570121393c3647bf2 = L.circleMarker(
+                [45.41886274, -75.69135298],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_06d529f0cf874f5e77cf336ef27e196b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_12e19a223147a8929e24db37f72b9d11 = $(`<div id="html_12e19a223147a8929e24db37f72b9d11" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_06d529f0cf874f5e77cf336ef27e196b.setContent(html_12e19a223147a8929e24db37f72b9d11);
+            
+        
+
+        circle_marker_9336d9681b45ffd570121393c3647bf2.bindPopup(popup_06d529f0cf874f5e77cf336ef27e196b)
+        ;
+
+        
+    
+    
+            var circle_marker_1ef61a78c18d18d62b2c64fa37859f08 = L.circleMarker(
+                [45.41886274, -75.69115298],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF7F50", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_2a6e95ffcac88936c436e24e7d86df30 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_bbc6196ed9cd3a45c51005d86de6b2c8 = $(`<div id="html_bbc6196ed9cd3a45c51005d86de6b2c8" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Place of Worship</div>`)[0];
+                popup_2a6e95ffcac88936c436e24e7d86df30.setContent(html_bbc6196ed9cd3a45c51005d86de6b2c8);
+            
+        
+
+        circle_marker_1ef61a78c18d18d62b2c64fa37859f08.bindPopup(popup_2a6e95ffcac88936c436e24e7d86df30)
+        ;
+
+        
+    
+    
+            var circle_marker_466eb47e4483f049873836ded7f073e8 = L.circleMarker(
+                [45.41886274, -75.69105298],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32CD32", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_eb961570d2ae817e2061e656e127b979 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_26d840ec58417569316c4054694e1b5e = $(`<div id="html_26d840ec58417569316c4054694e1b5e" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Park</div>`)[0];
+                popup_eb961570d2ae817e2061e656e127b979.setContent(html_26d840ec58417569316c4054694e1b5e);
+            
+        
+
+        circle_marker_466eb47e4483f049873836ded7f073e8.bindPopup(popup_eb961570d2ae817e2061e656e127b979)
+        ;
+
+        
+    
+    
+            var circle_marker_c5caf9ce06071d80bedbe662e83d2cd8 = L.circleMarker(
+                [45.41921372, -75.69156299000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00BFFF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_d60756eaff3f27420886b1caf285247e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_510cd6db2223504753cbd1fea468eb53 = $(`<div id="html_510cd6db2223504753cbd1fea468eb53" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Office</div>`)[0];
+                popup_d60756eaff3f27420886b1caf285247e.setContent(html_510cd6db2223504753cbd1fea468eb53);
+            
+        
+
+        circle_marker_c5caf9ce06071d80bedbe662e83d2cd8.bindPopup(popup_d60756eaff3f27420886b1caf285247e)
+        ;
+
+        
+    
+    
+            var circle_marker_46854b4e1c86bdccd241e6fd56d1c500 = L.circleMarker(
+                [45.4174835, -75.69018699],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_8a2f2b8cd02b54975c1920062b4f7234 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f1304777925aac74d3ba2dc1a16033b6 = $(`<div id="html_f1304777925aac74d3ba2dc1a16033b6" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_8a2f2b8cd02b54975c1920062b4f7234.setContent(html_f1304777925aac74d3ba2dc1a16033b6);
+            
+        
+
+        circle_marker_46854b4e1c86bdccd241e6fd56d1c500.bindPopup(popup_8a2f2b8cd02b54975c1920062b4f7234)
+        ;
+
+        
+    
+    
+            var circle_marker_f7b916ef2952a8fc78b25d3945e55a25 = L.circleMarker(
+                [45.4174835, -75.69028699],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_6d6641fcd66edb7ea6f827fdeb9b3e12 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_107d7cf3547691e8ff253af4e2ea8107 = $(`<div id="html_107d7cf3547691e8ff253af4e2ea8107" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_6d6641fcd66edb7ea6f827fdeb9b3e12.setContent(html_107d7cf3547691e8ff253af4e2ea8107);
+            
+        
+
+        circle_marker_f7b916ef2952a8fc78b25d3945e55a25.bindPopup(popup_6d6641fcd66edb7ea6f827fdeb9b3e12)
+        ;
+
+        
+    
+    
+            var circle_marker_baf33cf546b4c124560f01b60730821c = L.circleMarker(
+                [45.4174835, -75.69038699],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_9925a619acb0812d71310d8531edd7eb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5b4608c323c511c1e2e7c732e85c4128 = $(`<div id="html_5b4608c323c511c1e2e7c732e85c4128" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Education</div>`)[0];
+                popup_9925a619acb0812d71310d8531edd7eb.setContent(html_5b4608c323c511c1e2e7c732e85c4128);
+            
+        
+
+        circle_marker_baf33cf546b4c124560f01b60730821c.bindPopup(popup_9925a619acb0812d71310d8531edd7eb)
+        ;
+
+        
+    
+    
+            var circle_marker_977a9006203208b916d82e6e845e2eee = L.circleMarker(
+                [45.4174835, -75.68998699],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_e9d65f2594dc39147656e1c47bae5841 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b9b75f48f954714351d2c7bb7dc22fb8 = $(`<div id="html_b9b75f48f954714351d2c7bb7dc22fb8" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_e9d65f2594dc39147656e1c47bae5841.setContent(html_b9b75f48f954714351d2c7bb7dc22fb8);
+            
+        
+
+        circle_marker_977a9006203208b916d82e6e845e2eee.bindPopup(popup_e9d65f2594dc39147656e1c47bae5841)
+        ;
+
+        
+    
+    
+            var circle_marker_746048a7be8ad0955a74686c125bae3e = L.circleMarker(
+                [45.4174835, -75.68988698999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#32CD32", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_e8d3da5341157f1e4661e3e474e1d2c9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9b02bd2ebd99293ecae5dee34ac7dd20 = $(`<div id="html_9b02bd2ebd99293ecae5dee34ac7dd20" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Park</div>`)[0];
+                popup_e8d3da5341157f1e4661e3e474e1d2c9.setContent(html_9b02bd2ebd99293ecae5dee34ac7dd20);
+            
+        
+
+        circle_marker_746048a7be8ad0955a74686c125bae3e.bindPopup(popup_e8d3da5341157f1e4661e3e474e1d2c9)
+        ;
+
+        
+    
+    
+            var circle_marker_9e3d36b424435eb79a829295fd404448 = L.circleMarker(
+                [45.41905811, -75.69151602000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00BFFF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_41de4697d46df1da6ad39e12337efbba = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_720a39ce9c46d17ee65b6d7bdb5f36c2 = $(`<div id="html_720a39ce9c46d17ee65b6d7bdb5f36c2" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Office</div>`)[0];
+                popup_41de4697d46df1da6ad39e12337efbba.setContent(html_720a39ce9c46d17ee65b6d7bdb5f36c2);
+            
+        
+
+        circle_marker_9e3d36b424435eb79a829295fd404448.bindPopup(popup_41de4697d46df1da6ad39e12337efbba)
+        ;
+
+        
+    
+    
+            var circle_marker_1b9ebd5b9561f443b0a9659a79554419 = L.circleMarker(
+                [45.42822252, -75.69533811000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_89e0a6f210e84c31f7b101a43957e803 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1d8227d8c04a416025a1ccc17546b810 = $(`<div id="html_1d8227d8c04a416025a1ccc17546b810" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_89e0a6f210e84c31f7b101a43957e803.setContent(html_1d8227d8c04a416025a1ccc17546b810);
+            
+        
+
+        circle_marker_1b9ebd5b9561f443b0a9659a79554419.bindPopup(popup_89e0a6f210e84c31f7b101a43957e803)
+        ;
+
+        
+    
+    
+            var circle_marker_8ac0204c83a45cf872f46256d8a121af = L.circleMarker(
+                [45.42808166, -75.69544506],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_2906379f2ad41c91d6ed2828bc45f3c7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8af9f2930bf26d6dee7a851c3e05d853 = $(`<div id="html_8af9f2930bf26d6dee7a851c3e05d853" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_2906379f2ad41c91d6ed2828bc45f3c7.setContent(html_8af9f2930bf26d6dee7a851c3e05d853);
+            
+        
+
+        circle_marker_8ac0204c83a45cf872f46256d8a121af.bindPopup(popup_2906379f2ad41c91d6ed2828bc45f3c7)
+        ;
+
+        
+    
+    
+            var circle_marker_eaaa1dbc501fb4724d8e2f1bc6877297 = L.circleMarker(
+                [45.42808166, -75.69534506],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_15d5fd25d59f42b8b518330b79df3cd4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d66139895269a3b1ab196d0b5e205863 = $(`<div id="html_d66139895269a3b1ab196d0b5e205863" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_15d5fd25d59f42b8b518330b79df3cd4.setContent(html_d66139895269a3b1ab196d0b5e205863);
+            
+        
+
+        circle_marker_eaaa1dbc501fb4724d8e2f1bc6877297.bindPopup(popup_15d5fd25d59f42b8b518330b79df3cd4)
+        ;
+
+        
+    
+    
+            var circle_marker_7394146463941609720b2ade98589a06 = L.circleMarker(
+                [45.42833014, -75.69482796],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_2d086cd45c5e576ed4d504ff6af07c9c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3d46ed91b0bd6b9a967b32f26f259270 = $(`<div id="html_3d46ed91b0bd6b9a967b32f26f259270" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_2d086cd45c5e576ed4d504ff6af07c9c.setContent(html_3d46ed91b0bd6b9a967b32f26f259270);
+            
+        
+
+        circle_marker_7394146463941609720b2ade98589a06.bindPopup(popup_2d086cd45c5e576ed4d504ff6af07c9c)
+        ;
+
+        
+    
+    
+            var circle_marker_b99ec8d2440c7d2192d477c38759f598 = L.circleMarker(
+                [45.42807899, -75.69512512],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_82e92e000708acaa363ffe46c05fdb03 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b4b9332593f80003834de013bbbfe3b6 = $(`<div id="html_b4b9332593f80003834de013bbbfe3b6" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_82e92e000708acaa363ffe46c05fdb03.setContent(html_b4b9332593f80003834de013bbbfe3b6);
+            
+        
+
+        circle_marker_b99ec8d2440c7d2192d477c38759f598.bindPopup(popup_82e92e000708acaa363ffe46c05fdb03)
+        ;
+
+        
+    
+    
+            var circle_marker_3e064fbd068dee3520d8cfe8c83257d9 = L.circleMarker(
+                [45.42826187, -75.69516889],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_290e5e73ce6b0f77bc6562bc805dd972 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f0544a679637aaefbea83848be8a11a0 = $(`<div id="html_f0544a679637aaefbea83848be8a11a0" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_290e5e73ce6b0f77bc6562bc805dd972.setContent(html_f0544a679637aaefbea83848be8a11a0);
+            
+        
+
+        circle_marker_3e064fbd068dee3520d8cfe8c83257d9.bindPopup(popup_290e5e73ce6b0f77bc6562bc805dd972)
+        ;
+
+        
+    
+    
+            var circle_marker_206524cc3df6ad407ec0d051fe5e7200 = L.circleMarker(
+                [45.42826187, -75.69526889000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_1d88a8ced0de76cd35056e764c6a6378 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4624cd94eda5d3fd8787452eed7dc2c1 = $(`<div id="html_4624cd94eda5d3fd8787452eed7dc2c1" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_1d88a8ced0de76cd35056e764c6a6378.setContent(html_4624cd94eda5d3fd8787452eed7dc2c1);
+            
+        
+
+        circle_marker_206524cc3df6ad407ec0d051fe5e7200.bindPopup(popup_1d88a8ced0de76cd35056e764c6a6378)
+        ;
+
+        
+    
+    
+            var circle_marker_d8527d50df172c05ff602604f4564af3 = L.circleMarker(
+                [45.42826187, -75.69496889],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c2715f3ea61a4053021cb40029b1f33f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ddcf9e9369bbd196c0f658ac484a69f3 = $(`<div id="html_ddcf9e9369bbd196c0f658ac484a69f3" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_c2715f3ea61a4053021cb40029b1f33f.setContent(html_ddcf9e9369bbd196c0f658ac484a69f3);
+            
+        
+
+        circle_marker_d8527d50df172c05ff602604f4564af3.bindPopup(popup_c2715f3ea61a4053021cb40029b1f33f)
+        ;
+
+        
+    
+    
+            var circle_marker_02319fe9c846d82e7ac60d683c7be325 = L.circleMarker(
+                [45.4273578, -75.6927678],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#800080", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_424409ef00fde907b1819a6cd17fc821 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3fd462003a627ffa96ed9284d353ea69 = $(`<div id="html_3fd462003a627ffa96ed9284d353ea69" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Bar</div>`)[0];
+                popup_424409ef00fde907b1819a6cd17fc821.setContent(html_3fd462003a627ffa96ed9284d353ea69);
+            
+        
+
+        circle_marker_02319fe9c846d82e7ac60d683c7be325.bindPopup(popup_424409ef00fde907b1819a6cd17fc821)
+        ;
+
+        
+    
+    
+            var circle_marker_1f1369fca2c590a094c1ce17a09e1336 = L.circleMarker(
+                [45.4273578, -75.6928678],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_528e8b74ee32f28ee42cc6e74f37baa8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_04c07c701c18257379e0380f0b07dd87 = $(`<div id="html_04c07c701c18257379e0380f0b07dd87" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_528e8b74ee32f28ee42cc6e74f37baa8.setContent(html_04c07c701c18257379e0380f0b07dd87);
+            
+        
+
+        circle_marker_1f1369fca2c590a094c1ce17a09e1336.bindPopup(popup_528e8b74ee32f28ee42cc6e74f37baa8)
+        ;
+
+        
+    
+    
+            var circle_marker_be80623030da7aa1e2e7430e4589afb9 = L.circleMarker(
+                [45.4273578, -75.69296779999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_93890de89a3b00a6c599fa682e78ffb4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7d1b2c5a939921128e0b3ed77f044bef = $(`<div id="html_7d1b2c5a939921128e0b3ed77f044bef" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_93890de89a3b00a6c599fa682e78ffb4.setContent(html_7d1b2c5a939921128e0b3ed77f044bef);
+            
+        
+
+        circle_marker_be80623030da7aa1e2e7430e4589afb9.bindPopup(popup_93890de89a3b00a6c599fa682e78ffb4)
+        ;
+
+        
+    
+    
+            var circle_marker_1154177d880c344485257826b7baa4da = L.circleMarker(
+                [45.4273578, -75.69256779999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_28e17944f18395db55f29c70c62845ca = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_213e32d548595880710c293d1289ef56 = $(`<div id="html_213e32d548595880710c293d1289ef56" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_28e17944f18395db55f29c70c62845ca.setContent(html_213e32d548595880710c293d1289ef56);
+            
+        
+
+        circle_marker_1154177d880c344485257826b7baa4da.bindPopup(popup_28e17944f18395db55f29c70c62845ca)
+        ;
+
+        
+    
+    
+            var circle_marker_5e5f8e615fbb3d2a9a19a93d217b3116 = L.circleMarker(
+                [45.4273578, -75.69246779999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_f1eb5fc7768831104edc621a9dc43092 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5520f10b109965bf05055e9343816cd0 = $(`<div id="html_5520f10b109965bf05055e9343816cd0" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_f1eb5fc7768831104edc621a9dc43092.setContent(html_5520f10b109965bf05055e9343816cd0);
+            
+        
+
+        circle_marker_5e5f8e615fbb3d2a9a19a93d217b3116.bindPopup(popup_f1eb5fc7768831104edc621a9dc43092)
+        ;
+
+        
+    
+    
+            var circle_marker_d87efcf1e023e9b9f57de0471c686bb7 = L.circleMarker(
+                [45.42850909, -75.69429718],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_722e483e48aaa0a75827b21fca123934 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a5c853c287064c4405e31dbc17a663cc = $(`<div id="html_a5c853c287064c4405e31dbc17a663cc" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_722e483e48aaa0a75827b21fca123934.setContent(html_a5c853c287064c4405e31dbc17a663cc);
+            
+        
+
+        circle_marker_d87efcf1e023e9b9f57de0471c686bb7.bindPopup(popup_722e483e48aaa0a75827b21fca123934)
+        ;
+
+        
+    
+    
+            var circle_marker_9a97321c548e15450375d34fc815b99c = L.circleMarker(
+                [45.4284309, -75.6949711],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c5c203ac2e3327851d47ffc2b7a5901b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b17fd6d62612722a8b00332c67909472 = $(`<div id="html_b17fd6d62612722a8b00332c67909472" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Education</div>`)[0];
+                popup_c5c203ac2e3327851d47ffc2b7a5901b.setContent(html_b17fd6d62612722a8b00332c67909472);
+            
+        
+
+        circle_marker_9a97321c548e15450375d34fc815b99c.bindPopup(popup_c5c203ac2e3327851d47ffc2b7a5901b)
+        ;
+
+        
+    
+    
+            var circle_marker_ab4c85eb365c36da913fa2e7bdc2ef81 = L.circleMarker(
+                [45.42848439, -75.69441242],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_092ba4de382fd2fde67743d736049539 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ffef2db39020992584dcc92c1c862e5f = $(`<div id="html_ffef2db39020992584dcc92c1c862e5f" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_092ba4de382fd2fde67743d736049539.setContent(html_ffef2db39020992584dcc92c1c862e5f);
+            
+        
+
+        circle_marker_ab4c85eb365c36da913fa2e7bdc2ef81.bindPopup(popup_092ba4de382fd2fde67743d736049539)
+        ;
+
+        
+    
+    
+            var circle_marker_ed92b86c8a757f0fce9cc92bd828d29a = L.circleMarker(
+                [45.42890194, -75.69537623000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_01c8a19135cb4b3f05a0a3fd5bc48cd7 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_8560231581f168b0d0bb0ab5a3e44fbb = $(`<div id="html_8560231581f168b0d0bb0ab5a3e44fbb" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_01c8a19135cb4b3f05a0a3fd5bc48cd7.setContent(html_8560231581f168b0d0bb0ab5a3e44fbb);
+            
+        
+
+        circle_marker_ed92b86c8a757f0fce9cc92bd828d29a.bindPopup(popup_01c8a19135cb4b3f05a0a3fd5bc48cd7)
+        ;
+
+        
+    
+    
+            var circle_marker_a84460d8283bb15955f4ac306456f7d3 = L.circleMarker(
+                [45.42890194, -75.69527623],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#A52A2A", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_55ba1aac13fa959723f308a710878685 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4f3387b8a875e7264863671f7c95d62c = $(`<div id="html_4f3387b8a875e7264863671f7c95d62c" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Car Park</div>`)[0];
+                popup_55ba1aac13fa959723f308a710878685.setContent(html_4f3387b8a875e7264863671f7c95d62c);
+            
+        
+
+        circle_marker_a84460d8283bb15955f4ac306456f7d3.bindPopup(popup_55ba1aac13fa959723f308a710878685)
+        ;
+
+        
+    
+    
+            var circle_marker_3ea071729835ff8b1f420405b64028d6 = L.circleMarker(
+                [45.42868656, -75.69375306],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#A52A2A", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c4e9e361e54352ace56f9005e7a426f6 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f85bd51c7681bf5008c976ee037b5c18 = $(`<div id="html_f85bd51c7681bf5008c976ee037b5c18" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Car Park</div>`)[0];
+                popup_c4e9e361e54352ace56f9005e7a426f6.setContent(html_f85bd51c7681bf5008c976ee037b5c18);
+            
+        
+
+        circle_marker_3ea071729835ff8b1f420405b64028d6.bindPopup(popup_c4e9e361e54352ace56f9005e7a426f6)
+        ;
+
+        
+    
+    
+            var circle_marker_4a6c0878c17879ee3f189760e45db228 = L.circleMarker(
+                [45.42810224, -75.6927905],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00BFFF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_7ac7e99e43a4aa810bb546960a0b564b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3da4cf7835b2f7f095dc40992080bd99 = $(`<div id="html_3da4cf7835b2f7f095dc40992080bd99" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Office</div>`)[0];
+                popup_7ac7e99e43a4aa810bb546960a0b564b.setContent(html_3da4cf7835b2f7f095dc40992080bd99);
+            
+        
+
+        circle_marker_4a6c0878c17879ee3f189760e45db228.bindPopup(popup_7ac7e99e43a4aa810bb546960a0b564b)
+        ;
+
+        
+    
+    
+            var circle_marker_63798353e3e1234f4da1771e9b4549fc = L.circleMarker(
+                [45.4282513, -75.692837],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_ef41cfd5d467d214a21a99a4d919ee17 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ea6b8531820e57693a77726377109c73 = $(`<div id="html_ea6b8531820e57693a77726377109c73" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_ef41cfd5d467d214a21a99a4d919ee17.setContent(html_ea6b8531820e57693a77726377109c73);
+            
+        
+
+        circle_marker_63798353e3e1234f4da1771e9b4549fc.bindPopup(popup_ef41cfd5d467d214a21a99a4d919ee17)
+        ;
+
+        
+    
+    
+            var circle_marker_b3124af6b5118e3787307ace31bc5189 = L.circleMarker(
+                [45.42843863, -75.69441975000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00BFFF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_41121c1b4b4f64055489b2cb0f856353 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_224b5627cdec96e5aed846707380c514 = $(`<div id="html_224b5627cdec96e5aed846707380c514" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Office</div>`)[0];
+                popup_41121c1b4b4f64055489b2cb0f856353.setContent(html_224b5627cdec96e5aed846707380c514);
+            
+        
+
+        circle_marker_b3124af6b5118e3787307ace31bc5189.bindPopup(popup_41121c1b4b4f64055489b2cb0f856353)
+        ;
+
+        
+    
+    
+            var circle_marker_05a8fc6ca77ad77deb29094aa4f7a473 = L.circleMarker(
+                [45.42909797, -75.69311361],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_76442fddbaae63508b871ea822168c32 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0998e971e44ca553d9669212c4f00b94 = $(`<div id="html_0998e971e44ca553d9669212c4f00b94" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_76442fddbaae63508b871ea822168c32.setContent(html_0998e971e44ca553d9669212c4f00b94);
+            
+        
+
+        circle_marker_05a8fc6ca77ad77deb29094aa4f7a473.bindPopup(popup_76442fddbaae63508b871ea822168c32)
+        ;
+
+        
+    
+    
+            var circle_marker_9646a29a9b9fd5db2380fb3cf333ee62 = L.circleMarker(
+                [45.428548, -75.6945276],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_785962ed619917be7c06f0b7de3cec7e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_434dd173f11d0eee8ae62386848f455b = $(`<div id="html_434dd173f11d0eee8ae62386848f455b" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_785962ed619917be7c06f0b7de3cec7e.setContent(html_434dd173f11d0eee8ae62386848f455b);
+            
+        
+
+        circle_marker_9646a29a9b9fd5db2380fb3cf333ee62.bindPopup(popup_785962ed619917be7c06f0b7de3cec7e)
+        ;
+
+        
+    
+    
+            var circle_marker_76ee2ed918785036a205c7fc32fe46eb = L.circleMarker(
+                [45.428548, -75.6944276],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#A52A2A", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_8aeb5a5d014d46e66e6a1aba82e49ecc = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_9664c94b08519436053409b3c18e3fc2 = $(`<div id="html_9664c94b08519436053409b3c18e3fc2" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Car Park</div>`)[0];
+                popup_8aeb5a5d014d46e66e6a1aba82e49ecc.setContent(html_9664c94b08519436053409b3c18e3fc2);
+            
+        
+
+        circle_marker_76ee2ed918785036a205c7fc32fe46eb.bindPopup(popup_8aeb5a5d014d46e66e6a1aba82e49ecc)
+        ;
+
+        
+    
+    
+            var circle_marker_20a23a47bbdf5fea100f04734e6035e8 = L.circleMarker(
+                [45.42885188, -75.69371211],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#A52A2A", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_3179cf4655d913c8721f0cfaf59fa97e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2dc02e47217bb05886b7c8f273bc1a65 = $(`<div id="html_2dc02e47217bb05886b7c8f273bc1a65" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Car Park</div>`)[0];
+                popup_3179cf4655d913c8721f0cfaf59fa97e.setContent(html_2dc02e47217bb05886b7c8f273bc1a65);
+            
+        
+
+        circle_marker_20a23a47bbdf5fea100f04734e6035e8.bindPopup(popup_3179cf4655d913c8721f0cfaf59fa97e)
+        ;
+
+        
+    
+    
+            var circle_marker_e0816ada6a1e781faae03fd575704fef = L.circleMarker(
+                [45.42885188, -75.69361211],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_20ee62acad4129d32993a6383be17663 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2621485338221d2b94df1c14298dd2b5 = $(`<div id="html_2621485338221d2b94df1c14298dd2b5" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_20ee62acad4129d32993a6383be17663.setContent(html_2621485338221d2b94df1c14298dd2b5);
+            
+        
+
+        circle_marker_e0816ada6a1e781faae03fd575704fef.bindPopup(popup_20ee62acad4129d32993a6383be17663)
+        ;
+
+        
+    
+    
+            var circle_marker_6c1bdbcbb050d19fa303f6313faa56d6 = L.circleMarker(
+                [45.42767069, -75.69236823],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_ec0b67ad1f64af9b6f0b8e5e7e365a28 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4584d219696506031aff63bb60990bf0 = $(`<div id="html_4584d219696506031aff63bb60990bf0" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_ec0b67ad1f64af9b6f0b8e5e7e365a28.setContent(html_4584d219696506031aff63bb60990bf0);
+            
+        
+
+        circle_marker_6c1bdbcbb050d19fa303f6313faa56d6.bindPopup(popup_ec0b67ad1f64af9b6f0b8e5e7e365a28)
+        ;
+
+        
+    
+    
+            var circle_marker_3e07c93abe082d046d4ffa69ebf99a74 = L.circleMarker(
+                [45.42644353, -75.68916959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6347", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_d5d56be9de5866497a3db543f3614392 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a6ff25090c923025b41e186fc3a18be3 = $(`<div id="html_a6ff25090c923025b41e186fc3a18be3" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Apartment</div>`)[0];
+                popup_d5d56be9de5866497a3db543f3614392.setContent(html_a6ff25090c923025b41e186fc3a18be3);
+            
+        
+
+        circle_marker_3e07c93abe082d046d4ffa69ebf99a74.bindPopup(popup_d5d56be9de5866497a3db543f3614392)
+        ;
+
+        
+    
+    
+            var circle_marker_0721a7413bb22e94991bf46d817399f6 = L.circleMarker(
+                [45.42644353, -75.68926959000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_a328bc7cc788547cfe4de6b4d364c52d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f51903686185b321db1a71a13bccb5ac = $(`<div id="html_f51903686185b321db1a71a13bccb5ac" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_a328bc7cc788547cfe4de6b4d364c52d.setContent(html_f51903686185b321db1a71a13bccb5ac);
+            
+        
+
+        circle_marker_0721a7413bb22e94991bf46d817399f6.bindPopup(popup_a328bc7cc788547cfe4de6b4d364c52d)
+        ;
+
+        
+    
+    
+            var circle_marker_513b7ad92d9f1450d7b2147c2691512e = L.circleMarker(
+                [45.42644353, -75.68936959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_77949feee2fd4dff0527c135a62da761 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_33f698934049a284454abb8300b52503 = $(`<div id="html_33f698934049a284454abb8300b52503" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_77949feee2fd4dff0527c135a62da761.setContent(html_33f698934049a284454abb8300b52503);
+            
+        
+
+        circle_marker_513b7ad92d9f1450d7b2147c2691512e.bindPopup(popup_77949feee2fd4dff0527c135a62da761)
+        ;
+
+        
+    
+    
+            var circle_marker_88466320cb374ecc9954c62a9cd54488 = L.circleMarker(
+                [45.42644353, -75.68906959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1E90FF", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_2d498e909a509204bc7dfe204420d44c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_942f1ef3bc3e2ff7c41c832163b0674b = $(`<div id="html_942f1ef3bc3e2ff7c41c832163b0674b" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Specialty Shop</div>`)[0];
+                popup_2d498e909a509204bc7dfe204420d44c.setContent(html_942f1ef3bc3e2ff7c41c832163b0674b);
+            
+        
+
+        circle_marker_88466320cb374ecc9954c62a9cd54488.bindPopup(popup_2d498e909a509204bc7dfe204420d44c)
+        ;
+
+        
+    
+    
+            var circle_marker_31b5d79f3076d2bab4958983937b1306 = L.circleMarker(
+                [45.42644353, -75.68896959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_ac980154af394dfcb0680bdb0fe64005 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2958960300e8e3a88e4110ba49efe0ef = $(`<div id="html_2958960300e8e3a88e4110ba49efe0ef" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_ac980154af394dfcb0680bdb0fe64005.setContent(html_2958960300e8e3a88e4110ba49efe0ef);
+            
+        
+
+        circle_marker_31b5d79f3076d2bab4958983937b1306.bindPopup(popup_ac980154af394dfcb0680bdb0fe64005)
+        ;
+
+        
+    
+    
+            var circle_marker_3b7fcb90c3823b74b4e248f2be745a82 = L.circleMarker(
+                [45.42644353, -75.68886959],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_f4da8b21b434f6f65bb35a1a916a7979 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_224d5039338c9f5cd114a082e3a17a96 = $(`<div id="html_224d5039338c9f5cd114a082e3a17a96" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_f4da8b21b434f6f65bb35a1a916a7979.setContent(html_224d5039338c9f5cd114a082e3a17a96);
+            
+        
+
+        circle_marker_3b7fcb90c3823b74b4e248f2be745a82.bindPopup(popup_f4da8b21b434f6f65bb35a1a916a7979)
+        ;
+
+        
+    
+    
+            var circle_marker_ea8bbec25e944013386d8bf39ee12ffa = L.circleMarker(
+                [45.42907781, -75.69307033],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9932CC", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_6b1c90b172fd414b6b8188c434da3b0a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ce77da8c548abfadb0b6d9bec2900be8 = $(`<div id="html_ce77da8c548abfadb0b6d9bec2900be8" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Restaurant</div>`)[0];
+                popup_6b1c90b172fd414b6b8188c434da3b0a.setContent(html_ce77da8c548abfadb0b6d9bec2900be8);
+            
+        
+
+        circle_marker_ea8bbec25e944013386d8bf39ee12ffa.bindPopup(popup_6b1c90b172fd414b6b8188c434da3b0a)
+        ;
+
+        
+    
+    
+            var circle_marker_e6b7e2c1107679ba9d1ffb9ab0a67384 = L.circleMarker(
+                [45.42433485, -75.69497193000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FFA500", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_c2427e562638c9bafc41674a02039cdb = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_eef618d524de3c749c0254c3997091e6 = $(`<div id="html_eef618d524de3c749c0254c3997091e6" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Education</div>`)[0];
+                popup_c2427e562638c9bafc41674a02039cdb.setContent(html_eef618d524de3c749c0254c3997091e6);
+            
+        
+
+        circle_marker_e6b7e2c1107679ba9d1ffb9ab0a67384.bindPopup(popup_c2427e562638c9bafc41674a02039cdb)
+        ;
+
+        
+    
+    
+            var circle_marker_a1207ef3ca6f81af2375d43e8630ad48 = L.circleMarker(
+                [45.42433485, -75.69507193000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_51f583d7b339e07eef557935c8e7f320 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_dba032b017445810ad5cf070b65731a5 = $(`<div id="html_dba032b017445810ad5cf070b65731a5" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_51f583d7b339e07eef557935c8e7f320.setContent(html_dba032b017445810ad5cf070b65731a5);
+            
+        
+
+        circle_marker_a1207ef3ca6f81af2375d43e8630ad48.bindPopup(popup_51f583d7b339e07eef557935c8e7f320)
+        ;
+
+        
+    
+    
+            var circle_marker_91f15295ae6d4cd0b68155fb067d53f5 = L.circleMarker(
+                [45.42433485, -75.69517193],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B4513", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_a195db0af9845b1eda46097ab020c0ed = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d69f54a41bb0270f8af3d45f39892ae9 = $(`<div id="html_d69f54a41bb0270f8af3d45f39892ae9" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Bus Stop</div>`)[0];
+                popup_a195db0af9845b1eda46097ab020c0ed.setContent(html_d69f54a41bb0270f8af3d45f39892ae9);
+            
+        
+
+        circle_marker_91f15295ae6d4cd0b68155fb067d53f5.bindPopup(popup_a195db0af9845b1eda46097ab020c0ed)
+        ;
+
+        
+    
+    
+            var circle_marker_da24c21b83564e834d83085326d7a76e = L.circleMarker(
+                [45.42433485, -75.69527193],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_cadb9590e8cd7b73112ba5036426934e = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f2d0dc6465a7f912bba49de436dc2894 = $(`<div id="html_f2d0dc6465a7f912bba49de436dc2894" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_cadb9590e8cd7b73112ba5036426934e.setContent(html_f2d0dc6465a7f912bba49de436dc2894);
+            
+        
+
+        circle_marker_da24c21b83564e834d83085326d7a76e.bindPopup(popup_cadb9590e8cd7b73112ba5036426934e)
+        ;
+
+        
+    
+    
+            var circle_marker_250c8685c5078bf5580f865e72618c0e = L.circleMarker(
+                [45.42433485, -75.69537193000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_525aeeb53939c8ae7c04206de8d54c0a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_55551d9f4296fa68274b450bab889f59 = $(`<div id="html_55551d9f4296fa68274b450bab889f59" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_525aeeb53939c8ae7c04206de8d54c0a.setContent(html_55551d9f4296fa68274b450bab889f59);
+            
+        
+
+        circle_marker_250c8685c5078bf5580f865e72618c0e.bindPopup(popup_525aeeb53939c8ae7c04206de8d54c0a)
+        ;
+
+        
+    
+    
+            var circle_marker_d5da71b765e9155d73927390269efd93 = L.circleMarker(
+                [45.42433485, -75.69487193],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E8B57", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_f0f1561e1a0ab0c145623e6cab711e41 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ed7a1da83c5680bd01889a9b61b2f296 = $(`<div id="html_ed7a1da83c5680bd01889a9b61b2f296" style="width: 100.0%; height: 100.0%;">Land Use: Open Space - Derelict Building</div>`)[0];
+                popup_f0f1561e1a0ab0c145623e6cab711e41.setContent(html_ed7a1da83c5680bd01889a9b61b2f296);
+            
+        
+
+        circle_marker_d5da71b765e9155d73927390269efd93.bindPopup(popup_f0f1561e1a0ab0c145623e6cab711e41)
+        ;
+
+        
+    
+    
+            var circle_marker_cba56876d117ac80441bd01f7ad3f9b7 = L.circleMarker(
+                [45.42433485, -75.69477193],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF7F50", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_35dd43e856310a211c87a0cf2d96afed = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_902da3f949665db4e361eb27f632663d = $(`<div id="html_902da3f949665db4e361eb27f632663d" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Place of Worship</div>`)[0];
+                popup_35dd43e856310a211c87a0cf2d96afed.setContent(html_902da3f949665db4e361eb27f632663d);
+            
+        
+
+        circle_marker_cba56876d117ac80441bd01f7ad3f9b7.bindPopup(popup_35dd43e856310a211c87a0cf2d96afed)
+        ;
+
+        
+    
+    
+            var circle_marker_e88c220d7a5ffc86655341b2d388a41a = L.circleMarker(
+                [45.42433485, -75.69467193],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC143C", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_35e1a3393f51782c46c6e0af47b8f2c1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c8506233913c722f7720dd37de7893e1 = $(`<div id="html_c8506233913c722f7720dd37de7893e1" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Townhouse</div>`)[0];
+                popup_35e1a3393f51782c46c6e0af47b8f2c1.setContent(html_c8506233913c722f7720dd37de7893e1);
+            
+        
+
+        circle_marker_e88c220d7a5ffc86655341b2d388a41a.bindPopup(popup_35e1a3393f51782c46c6e0af47b8f2c1)
+        ;
+
+        
+    
+    
+            var circle_marker_09ab3d9491aa52b9e3cc98a33c256520 = L.circleMarker(
+                [45.42433485, -75.69457193000001],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#B22222", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_2c087f82b53c3a9adeee0aa76eb9f1e8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_687018056c7af4f5a2cecdc94cc14ead = $(`<div id="html_687018056c7af4f5a2cecdc94cc14ead" style="width: 100.0%; height: 100.0%;">Land Use: Residential - Detached</div>`)[0];
+                popup_2c087f82b53c3a9adeee0aa76eb9f1e8.setContent(html_687018056c7af4f5a2cecdc94cc14ead);
+            
+        
+
+        circle_marker_09ab3d9491aa52b9e3cc98a33c256520.bindPopup(popup_2c087f82b53c3a9adeee0aa76eb9f1e8)
+        ;
+
+        
+    
+    
+            var circle_marker_93150950527c981bba0236b2eb60ddc7 = L.circleMarker(
+                [45.42433485, -75.69447193],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF8C00", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_f6ff68d7a0a215be6359e18a4e656585 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6e3489399a5fb863f2448682963c50c3 = $(`<div id="html_6e3489399a5fb863f2448682963c50c3" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Library</div>`)[0];
+                popup_f6ff68d7a0a215be6359e18a4e656585.setContent(html_6e3489399a5fb863f2448682963c50c3);
+            
+        
+
+        circle_marker_93150950527c981bba0236b2eb60ddc7.bindPopup(popup_f6ff68d7a0a215be6359e18a4e656585)
+        ;
+
+        
+    
+    
+            var circle_marker_c06c6825617d61a06c9815665b89ec41 = L.circleMarker(
+                [45.42654176, -75.69118116],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ADD8E6", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_d9aeefeea3e5b2a162ace14dba5e4001 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_be2d8e0e873dee4fdf81e0fa93fc2bba = $(`<div id="html_be2d8e0e873dee4fdf81e0fa93fc2bba" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Fast Food</div>`)[0];
+                popup_d9aeefeea3e5b2a162ace14dba5e4001.setContent(html_be2d8e0e873dee4fdf81e0fa93fc2bba);
+            
+        
+
+        circle_marker_c06c6825617d61a06c9815665b89ec41.bindPopup(popup_d9aeefeea3e5b2a162ace14dba5e4001)
+        ;
+
+        
+    
+    
+            var circle_marker_bf4c531a33cda221dcf7628c6b6331ea = L.circleMarker(
+                [45.42654176, -75.69128116],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4682B4", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_a1494131f78786db64dac7361ffe9539 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_39bfdffc151cd915c4f60b18a49cb8c8 = $(`<div id="html_39bfdffc151cd915c4f60b18a49cb8c8" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Personal Services</div>`)[0];
+                popup_a1494131f78786db64dac7361ffe9539.setContent(html_39bfdffc151cd915c4f60b18a49cb8c8);
+            
+        
+
+        circle_marker_bf4c531a33cda221dcf7628c6b6331ea.bindPopup(popup_a1494131f78786db64dac7361ffe9539)
+        ;
+
+        
+    
+    
+            var circle_marker_e93ffd3041142b326aeb7da791577aaf = L.circleMarker(
+                [45.42654176, -75.69138115999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5F9EA0", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_0f932e6d5d94a49d4533e10a7bda806b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_dd3af081584b690d67077d185fd5e3fe = $(`<div id="html_dd3af081584b690d67077d185fd5e3fe" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Market</div>`)[0];
+                popup_0f932e6d5d94a49d4533e10a7bda806b.setContent(html_dd3af081584b690d67077d185fd5e3fe);
+            
+        
+
+        circle_marker_e93ffd3041142b326aeb7da791577aaf.bindPopup(popup_0f932e6d5d94a49d4533e10a7bda806b)
+        ;
+
+        
+    
+    
+            var circle_marker_a66f750c5318e8d632aabaa9e217ccaa = L.circleMarker(
+                [45.42654176, -75.69148116],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#87CEEB", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_4a550ccf2cab182bbdfdcb665a9e8a66 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_478a426027020183492922498ae752fb = $(`<div id="html_478a426027020183492922498ae752fb" style="width: 100.0%; height: 100.0%;">Land Use: Commercial - Vacant</div>`)[0];
+                popup_4a550ccf2cab182bbdfdcb665a9e8a66.setContent(html_478a426027020183492922498ae752fb);
+            
+        
+
+        circle_marker_a66f750c5318e8d632aabaa9e217ccaa.bindPopup(popup_4a550ccf2cab182bbdfdcb665a9e8a66)
+        ;
+
+        
+    
+    
+            var circle_marker_02c181e083c4e272512e3b9946bfa0fc = L.circleMarker(
+                [45.42654176, -75.69158116],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF8C00", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_4a765b1eb331dc2f5fb37a9516c3ecb3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_aa9a97f87e42b275278f3047fe3ef1a7 = $(`<div id="html_aa9a97f87e42b275278f3047fe3ef1a7" style="width: 100.0%; height: 100.0%;">Land Use: Public Building - Library</div>`)[0];
+                popup_4a765b1eb331dc2f5fb37a9516c3ecb3.setContent(html_aa9a97f87e42b275278f3047fe3ef1a7);
+            
+        
+
+        circle_marker_02c181e083c4e272512e3b9946bfa0fc.bindPopup(popup_4a765b1eb331dc2f5fb37a9516c3ecb3)
+        ;
+
+        
+    
+    
+            var circle_marker_0468d7d7fd540c39749a14a9fde42222 = L.circleMarker(
+                [45.42654176, -75.69098115999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B4513", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_88aebd6f73a6a48887d6a2e31f042e4a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f2acb381d92d950504186f710756a4b4 = $(`<div id="html_f2acb381d92d950504186f710756a4b4" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Bus Stop</div>`)[0];
+                popup_88aebd6f73a6a48887d6a2e31f042e4a.setContent(html_f2acb381d92d950504186f710756a4b4);
+            
+        
+
+        circle_marker_0468d7d7fd540c39749a14a9fde42222.bindPopup(popup_88aebd6f73a6a48887d6a2e31f042e4a)
+        ;
+
+        
+    
+    
+            var circle_marker_754425f3a66a24356468a8bcc5594efc = L.circleMarker(
+                [45.42654176, -75.69088115999999],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00008B", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_5205d070697a6a6d08c8c9b97de0b325 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_fb946720bf67182dd0b154f1bb9019b1 = $(`<div id="html_fb946720bf67182dd0b154f1bb9019b1" style="width: 100.0%; height: 100.0%;">Land Use: Services - Financial</div>`)[0];
+                popup_5205d070697a6a6d08c8c9b97de0b325.setContent(html_fb946720bf67182dd0b154f1bb9019b1);
+            
+        
+
+        circle_marker_754425f3a66a24356468a8bcc5594efc.bindPopup(popup_5205d070697a6a6d08c8c9b97de0b325)
+        ;
+
+        
+    
+    
+            var circle_marker_23576ae49905937acc217459a06f81ee = L.circleMarker(
+                [45.42654176, -75.69078116],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8A2BE2", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_55fb90ed7d21f201653927360d83b76a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5ba7074df6fed288726ae8ded942cea3 = $(`<div id="html_5ba7074df6fed288726ae8ded942cea3" style="width: 100.0%; height: 100.0%;">Land Use: Entertainment - Cinema</div>`)[0];
+                popup_55fb90ed7d21f201653927360d83b76a.setContent(html_5ba7074df6fed288726ae8ded942cea3);
+            
+        
+
+        circle_marker_23576ae49905937acc217459a06f81ee.bindPopup(popup_55fb90ed7d21f201653927360d83b76a)
+        ;
+
+        
+    
+    
+            var circle_marker_5b2bf3a747aa33488247750043f9cf84 = L.circleMarker(
+                [45.42654176, -75.69068116],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#A52A2A", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18, "stroke": true, "weight": 3}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+        var popup_037c28fade5576ed544d48dd6eb99af8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_bfafe5eca5d1722739137fcfe9dec147 = $(`<div id="html_bfafe5eca5d1722739137fcfe9dec147" style="width: 100.0%; height: 100.0%;">Land Use: Transport - Car Park</div>`)[0];
+                popup_037c28fade5576ed544d48dd6eb99af8.setContent(html_bfafe5eca5d1722739137fcfe9dec147);
+            
+        
+
+        circle_marker_5b2bf3a747aa33488247750043f9cf84.bindPopup(popup_037c28fade5576ed544d48dd6eb99af8)
+        ;
+
+        
+    
+    
+            var marker_3787eae205646f6dde822e4139da02bf = L.marker(
+                [45.37671213, -75.70777173],
+                {}
+            ).addTo(map_197ed8d781b2e49ec912ce21adb49fad);
+        
+    
+            var icon_e9e710468306aa68175b1c5c9d4de32f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_3787eae205646f6dde822e4139da02bf.setIcon(icon_e9e710468306aa68175b1c5c9d4de32f);
+        
+    
+        var popup_f0693c6298cb67f26e45613070573c84 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_88329bbaae462895e94d8154c75b0fff = $(`<div id="html_88329bbaae462895e94d8154c75b0fff" style="width: 100.0%; height: 100.0%;">Special Location: -75.70777173, 45.37671213</div>`)[0];
+                popup_f0693c6298cb67f26e45613070573c84.setContent(html_88329bbaae462895e94d8154c75b0fff);
+            
+        
+
+        marker_3787eae205646f6dde822e4139da02bf.bindPopup(popup_f0693c6298cb67f26e45613070573c84)
+        ;
+
+        
+    
+</script>
+</html>
